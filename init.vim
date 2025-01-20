@@ -1,6 +1,11 @@
 call plug#begin()
 " Themes:
 Plug 'sainnhe/sonokai'
+" Snn
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
+Plug 'https://github.com/rafamadriz/friendly-snippets'
+Plug 'https://github.com/honza/vim-snippets'
+Plug 'https://github.com/saadparwaiz1/cmp_luasnip'
 
 " line and icons:
 Plug 'nvim-lualine/lualine.nvim'
@@ -9,22 +14,20 @@ Plug 'nvim-tree/nvim-web-devicons'
 " file managing
 Plug 'stevearc/oil.nvim' 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' } 
 
 " Syntax Linter
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 " Plug 'dense-analysis/ale'
 
 " Completion:
-Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 Plug 'honza/vim-snippets'
-
 " Lsp
-" Plug 'williamboman/mason.nvim'
-" Plug 'williamboman/mason-lspconfig.nvim'
-" Plug 'neovim/nvim-lspconfig'
-" Plug 'hrsh7th/nvim-cmp'
-" Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
 " Tmux
 "Plug 'https://github.com/christoomey/vim-tmux-navigator'
 
@@ -91,11 +94,6 @@ map <space>l <C-w>l
 
 
 
-" autocmd """"""""""
-" coc python
-autocmd FileType python let b:coc_root_patterns = ['.venv', '.git', '.env', 'venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
-
-
 
 
 
@@ -118,36 +116,17 @@ let g:sonokai_current_word = 'bold'
 colorscheme sonokai
 
 
-" COC () ##################################################################### 
-let g:coc_global_extensions = [ 'coc-snippets', 'coc-pyright', 'coc-clangd' ]
-" Coc Snippets ##########
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-" Use <leader>x for convert visual selected code to snippet
-xmap <leader>x  <Plug>(coc-convert-snippet)
-
-
 
 
 lua << EOF
-require("lualine_conf")
-require("comment_conf")
-require("oil_conf")
-require("coc_conf")
-
-require("telescope_conf")
+require("plugins.lsps")
+require("plugins.lsnip")
+require("plugins.nvim-cmp")
+require("plugins.mason")
+require("plugins.lspconfig")
+require("plugins.lualine_conf")
+require("plugins.comment_conf")
+require("plugins.oil_conf")
+require("plugins.telescope_conf")
 require('nvim-autopairs').setup({ignored_next_char = "[%w%.]"})
 EOF

@@ -1,7 +1,0 @@
-{
-    "languageserver": {
-
-    },
-    "suggest.noselect": true,
-    "coc.preferences.extensionUpdateCheck": "never"
-}
